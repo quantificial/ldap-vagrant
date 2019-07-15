@@ -1,11 +1,13 @@
 Vagrant.configure(2) do |config|
   #config.vm.box = "ubuntu-18.04-amd64"
+  # use the generic ubuntu vm
   config.vm.box = "generic/ubuntu1804"
   
   config.vm.hostname = "ldap.example.com"
 
   config.vm.network "private_network", ip: "192.168.33.253", libvirt__forward_mode: "route", libvirt__dhcp_enabled: false
   
+  # add port forward to the localhost port 389
   config.vm.network "forwarded_port", guest: 389, host: 389
 
   config.vm.provider "libvirt" do |lv, config|
